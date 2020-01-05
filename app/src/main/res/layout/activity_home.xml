@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+        <ImageView
+                android:id="@+id/find_slot"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/search"
+                android:contentDescription="@string/find_slot"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/find_slot_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/find_slot"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/find_slot"/>
+
+        <ImageView
+                android:id="@+id/track_car"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/track_car"
+                android:layout_marginTop="@dimen/home_options_margin"
+                android:contentDescription="@string/track_car"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/find_slot_lbl"/>
+
+        <TextView
+                android:id="@+id/track_car_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/track_car"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/track_car"/>
+
+        <ImageView
+                android:id="@+id/options"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/settings"
+                android:layout_marginTop="@dimen/home_options_margin"
+                android:contentDescription="@string/options"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/track_car_lbl"/>
+
+        <TextView
+                android:id="@+id/options_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/options"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/options"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

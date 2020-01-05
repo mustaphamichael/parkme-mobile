@@ -1,0 +1,8 @@
+<resources>
+    <!-- App Screen Dimensions -->
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="text_label_margin">16dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
+    <dimen name="home_options_margin">28dp</dimen>
+    <dimen name="list_item_padding">8dp</dimen>
+</resources>

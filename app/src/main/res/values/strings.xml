@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ParkMe</string>
+
+    <!--All ImageView Content Description-->
+    <string name="app_logo">App Logo</string>
+    <string name="destination_icon">Destination Icon</string>
+
+    <!--Index Page-->
+    <string name="index_instruction">Please fill in your details below to use the app.</string>
+    <string name="number_plate">Number Plate</string>
+    <string name="driver_name">Name</string>
+    <string name="driver_phone">Mobile Number</string>
+    <string name="proceed">Proceed</string>
+
+    <!--Home Screen-->
+    <string name="find_slot">Find a Slot</string>
+    <string name="track_car">Track My Car</string>
+    <string name="options">Options</string>
+
+    <!--Find a Slot-->
+    <string name="select_instruction">Select your preferred destination</string>
+
+    <!--Messages-->
+    <string name="empty_field_error">Field cannot be empty</string>
+</resources>
