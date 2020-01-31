@@ -7,10 +7,12 @@
 
     <!--Index Page-->
     <string name="index_instruction">Please fill in your details below to use the app.</string>
-    <string name="number_plate">Number Plate</string>
+    <string name="add_car_instruction">Add your car details.</string>
     <string name="driver_name">Name</string>
     <string name="driver_phone">Mobile Number</string>
-    <string name="proceed">Proceed</string>
+    <string name="number_plate">Number Plate</string>
+    <string name="manufacturer">Manufacturer</string>
+    <string name="model">Model</string>
 
     <!--Home Screen-->
     <string name="find_slot">Find a Slot</string>
@@ -22,4 +24,8 @@
 
     <!--Messages-->
     <string name="empty_field_error">Field cannot be empty</string>
+
+    <!--Generic Buttons-->
+    <string name="next">Next</string>
+    <string name="proceed">Proceed</string>
 </resources>

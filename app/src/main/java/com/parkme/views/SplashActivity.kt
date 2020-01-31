@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.parkme.R
+import com.parkme.views.signup.SignUpActivity
 
 /*
  * @created - 04/01/2020
