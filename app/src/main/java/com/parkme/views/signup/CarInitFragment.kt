@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.parkme.R
 import com.parkme.core.utils.ViewUtils
 import com.parkme.core.config.ServiceErrorResponse
+import com.parkme.core.config.SessionManager
 import com.parkme.services.car.Car
 import com.parkme.services.driver.Driver
 import com.parkme.services.driver.DriverImpl
@@ -108,6 +109,8 @@ class CarInitFragment : Fragment() {
         disposable.add(
             DriverImpl(context!!).signUp(driver)
                 .subscribe({
+                    // Save session
+                    SessionManager(activity!!).saveSession(it)
                     startActivity(Intent(activity!!, HomeActivity::class.java))
                 },
                     {

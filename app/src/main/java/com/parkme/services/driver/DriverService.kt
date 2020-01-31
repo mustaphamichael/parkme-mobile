@@ -3,10 +3,7 @@ package com.parkme.services.driver
 import com.parkme.core.config.ServiceGenerator.Companion.BASE_PATH
 import com.parkme.core.config.ServiceResponse
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /*
  * @created - 22/01/2020
@@ -18,6 +15,9 @@ import retrofit2.http.Path
  * The API endpoints are called here
  */
 interface DriverService {
+
+    @GET("$BASE_PATH/drivers/{phone}")
+    fun getDetail(@Path("phone") phone: String): Single<ServiceResponse<Driver>>
 
     @POST("$BASE_PATH/auth/login")
     fun login(@Body driver: Driver): Single<ServiceResponse<Driver>>
