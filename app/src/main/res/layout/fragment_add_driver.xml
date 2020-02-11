@@ -62,17 +62,40 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/driver_name"/>
 
-        <EditText
-                android:id="@+id/driver_phone"
-                android:layout_width="0dp"
+        <RelativeLayout
+                android:id="@+id/phone_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:maxLines="1"
-                android:maxLength="14"
-                android:background="@drawable/edittext_background"
+                android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/driver_phone_lbl"/>
+                app:layout_constraintTop_toBottomOf="@id/driver_phone_lbl">
+
+            <TextView
+                    android:id="@+id/country_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="+234"
+                    android:background="@drawable/edittext_background"
+                    android:textAppearance="?android:textAppearanceMedium"/>
+
+            <EditText
+                    android:id="@+id/driver_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center|end"
+                    android:layout_toEndOf="@id/country_code"
+                    android:inputType="phone"
+                    android:background="@drawable/edittext_background"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"/>
+
+        </RelativeLayout>
 
         <Button
                 android:id="@+id/next_btn"
@@ -85,6 +108,6 @@
                 android:layout_marginTop="@dimen/button_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/driver_phone"/>
+                app:layout_constraintTop_toBottomOf="@id/phone_layout"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

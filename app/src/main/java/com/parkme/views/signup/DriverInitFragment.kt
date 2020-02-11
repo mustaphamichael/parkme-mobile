@@ -57,11 +57,24 @@ class DriverInitFragment : Fragment() {
         var focusView: View? = null
         var cancel = false
 
-        if (driverPhone.isBlank()) {
-            driver_phone.error = getString(R.string.empty_field_error)
-            focusView = driver_phone
-            cancel = true
+        when {
+            driverPhone.isBlank() -> {
+                driver_phone.error = getString(R.string.empty_field_error)
+                focusView = driver_phone
+                cancel = true
+            }
+            driverPhone.substring(0, 1) == "0" -> {
+                driver_phone.error = getString(R.string.zero_phone_error)
+                focusView = driver_phone
+                cancel = true
+            }
+            driverPhone.length != 10 -> {
+                driver_phone.error = getString(R.string.invalid_phone)
+                focusView = driver_phone
+                cancel = true
+            }
         }
+
         if (driverName.isBlank()) {
             driver_name.error = getString(R.string.empty_field_error)
             focusView = driver_name
@@ -71,7 +84,7 @@ class DriverInitFragment : Fragment() {
         if (cancel) focusView!!.requestFocus()
         else {
             ViewUtils.hideKeyboard(activity!!) // Hide keyboard
-            val driver = Driver(driverPhone, driverName)
+            val driver = Driver("234$driverPhone", driverName)
             listener!!.onDriverCreate(driver)
         }
     }

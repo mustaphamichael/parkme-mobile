@@ -24,6 +24,8 @@
 
     <!--Messages-->
     <string name="empty_field_error">Field cannot be empty</string>
+    <string name="zero_phone_error">Phone number should not begin with 0</string>
+    <string name="invalid_phone">Phone number is invalid</string>
 
     <!--Generic Buttons-->
     <string name="next">Next</string>
