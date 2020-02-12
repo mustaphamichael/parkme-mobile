@@ -32,7 +32,7 @@
         <activity android:name=".views.signup.SignUpActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:noHistory="true"/>
-        <activity android:name=".views.findslot.activity.DestinationListActivity"/>
+        <activity android:name=".views.findslot.activity.TerminalListActivity"/>
     </application>
 
 </manifest>

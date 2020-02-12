@@ -3,7 +3,7 @@
 
     <!--All ImageView Content Description-->
     <string name="app_logo">App Logo</string>
-    <string name="destination_icon">Destination Icon</string>
+    <string name="terminal_icon">Terminal Icon</string>
 
     <!--Index Page-->
     <string name="index_instruction">Please fill in your details below to use the app.</string>
@@ -21,6 +21,7 @@
 
     <!--Find a Slot-->
     <string name="select_instruction">Select your preferred destination</string>
+    <string name="empty_terminal_message">There are no terminals available</string>
 
     <!--Messages-->
     <string name="empty_field_error">Field cannot be empty</string>
