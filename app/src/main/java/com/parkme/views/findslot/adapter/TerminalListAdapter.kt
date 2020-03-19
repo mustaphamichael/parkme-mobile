@@ -1,6 +1,7 @@
 package com.parkme.views.findslot.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.parkme.R
 import com.parkme.services.terminal.Terminal
+import com.parkme.views.findslot.FindSlotActivity
+import com.parkme.views.findslot.fragment.TerminalListFragment
 import com.squareup.picasso.Picasso
 
 /*
@@ -17,12 +20,21 @@ import com.squareup.picasso.Picasso
  * @author  - Michael Mustapha
  */
 
-class TerminalListAdapter(private val context: Context, private val terminals: ArrayList<Terminal>) :
+class TerminalListAdapter(
+    private val context: Context,
+    private val listener: TerminalListFragment.TerminalListListener,
+    private val terminals: ArrayList<Terminal>
+) :
     RecyclerView.Adapter<TerminalListAdapter.TerminalViewHolder>() {
 
     override fun onBindViewHolder(holder: TerminalViewHolder, position: Int) {
         val terminal = terminals[position]
         holder.setViewData(terminal)
+
+        holder.itemView.setOnClickListener {
+            // Navigate to Slot Designation screen
+            listener.onSelect(terminal.id)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TerminalViewHolder {

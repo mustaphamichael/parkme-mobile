@@ -1,9 +1,11 @@
-package com.parkme.views.findslot.activity
+package com.parkme.views.findslot.fragment
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.parkme.R
 import com.parkme.core.utils.ViewUtils
@@ -11,38 +13,34 @@ import com.parkme.services.terminal.Terminal
 import com.parkme.services.terminal.TerminalImpl
 import com.parkme.views.findslot.adapter.TerminalListAdapter
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_terminal_list.*
+import kotlinx.android.synthetic.main.fragment_terminal_list.*
 
 /*
- * @created - 04/01/2020
+ * @created - 12/02/2020
  * @project - ParkMeMobile
  * @author  - Michael Mustapha
  */
 
-class TerminalListActivity : AppCompatActivity() {
+class TerminalListFragment : Fragment() {
+    private var listener: TerminalListListener? = null
     private var terminals: ArrayList<Terminal> = ArrayList()
     private lateinit var listAdapter: TerminalListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_terminal_list)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.find_slot)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_terminal_list, container, false)
+    }
 
-        listAdapter = TerminalListAdapter(this, terminals)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        listAdapter = TerminalListAdapter(context!!, listener!!, terminals)
 
         // Set the RecyclerView's layout and adapter
         terminal_view.apply {
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(this@TerminalListActivity)
+            layoutManager = LinearLayoutManager(context!!)
             setHasFixedSize(true)
         }
         fetchDestinations()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) onBackPressed() // Handle Backward Navigation
-        return super.onOptionsItemSelected(item)
     }
 
     /** Fetch the list of available terminals from API or local DB */
@@ -52,7 +50,11 @@ class TerminalListActivity : AppCompatActivity() {
                 .subscribe({
                     progress_bar.visibility = View.GONE
                     updateView(it)
-                }, { ViewUtils.displayAPIError(it, error_text, progress_bar) })
+                }, {
+                    error_text.text = ViewUtils.parseAPIError(it)
+                    progress_bar.visibility = View.GONE
+                    error_text.visibility = View.VISIBLE
+                })
         )
     }
 
@@ -74,5 +76,29 @@ class TerminalListActivity : AppCompatActivity() {
             error_text.text = getString(R.string.empty_terminal_message)
             error_text.visibility = View.VISIBLE
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is TerminalListListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement DriverFragmentListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    interface TerminalListListener {
+        fun onSelect(terminalId: String)
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance() = TerminalListFragment()
     }
 }

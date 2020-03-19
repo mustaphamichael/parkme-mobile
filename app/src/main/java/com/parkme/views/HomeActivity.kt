@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.parkme.R
-import com.parkme.views.findslot.activity.TerminalListActivity
+import com.parkme.views.findslot.FindSlotActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 /*
@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
     private fun optionSelection() {
         // Let the driver select his destination
         find_slot.setOnClickListener {
-            startActivity(Intent(this, TerminalListActivity::class.java))
+            startActivity(Intent(this, FindSlotActivity::class.java))
         }
     }
 }

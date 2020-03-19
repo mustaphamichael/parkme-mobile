@@ -1,10 +1,7 @@
 package com.parkme.core.utils
 
 import android.app.Activity
-import android.view.View
 import android.view.WindowManager
-import android.widget.ProgressBar
-import android.widget.TextView
 import com.google.gson.Gson
 import com.parkme.core.config.ServiceErrorResponse
 import retrofit2.HttpException
@@ -30,22 +27,22 @@ object ViewUtils {
     }
 
     /**
-     * Display errors returned from webservice
-     *
+     * Parse errors returned from webservice
      * @param throwable - Error returned from HTTP client
-     * @param errorText - TextView to render the error message on
-     * @param progressBar
+     * @return String?
      */
-    fun displayAPIError(throwable: Throwable, errorText: TextView?, progressBar: ProgressBar?) {
-        val error = (throwable as HttpException).response().errorBody()!!.string()
-        val errorObj = Gson().fromJson(error, ServiceErrorResponse::class.java)
+    fun parseAPIError(throwable: Throwable): String? {
+        var message: String
 
-        var message = errorObj.message
-        if (!errorObj.errors.isNullOrEmpty()) {
-            errorObj.errors.forEach { message += it + "\n" }
-        }
-        errorText?.text = message
-        progressBar?.visibility = View.GONE // Hide progress bar
-        errorText?.visibility = View.VISIBLE // Show error text
+        if (throwable is HttpException) {
+            val error = throwable.response().errorBody()!!.string()
+            val errorObj = Gson().fromJson(error, ServiceErrorResponse::class.java)
+
+            message = errorObj.message
+            if (!errorObj.errors.isNullOrEmpty()) {
+                errorObj.errors.forEach { message += it + "\n" }
+            }
+        } else message = throwable.message.toString()
+        return message
     }
 }

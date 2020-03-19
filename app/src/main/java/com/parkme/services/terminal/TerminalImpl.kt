@@ -1,6 +1,7 @@
 package com.parkme.services.terminal
 
 import com.parkme.core.config.ServiceGenerator
+import com.parkme.core.config.ServiceResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,10 +22,17 @@ class TerminalImpl {
             .map { it.data }
     }
 
-    fun getFreeSlot(terminalId: String): Single<String> {
+    fun getFreeSlot(terminalId: String): Single<ServiceResponse<Slot>> {
         return service.getFreeSlot(terminalId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.message }
+            .map { it }
+    }
+
+    fun handleDriverDecision(body: Slot): Single<ServiceResponse<Any>> {
+        return service.handleDriverDecision(body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it }
     }
 }
