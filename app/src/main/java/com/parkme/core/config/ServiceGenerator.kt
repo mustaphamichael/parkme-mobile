@@ -1,5 +1,6 @@
 package com.parkme.core.config
 
+import com.parkme.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,7 +28,7 @@ class ServiceGenerator {
         val client: OkHttpClient = httpClient.readTimeout(45, TimeUnit.SECONDS).build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client)
@@ -36,8 +37,6 @@ class ServiceGenerator {
     }
 
     companion object {
-        private const val BASE_URL = "http://10.0.2.2:5000"
         const val BASE_PATH = "/api/parkme"
-
     }
 }

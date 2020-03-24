@@ -17,6 +17,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "SERVER_URL", '"http://10.0.2.2:5000"')
+        }
+        debug {
+            buildConfigField("String", "SERVER_URL", '"http://10.0.2.2:5000"')
         }
     }
 }
@@ -58,4 +62,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 }

@@ -1,5 +1,6 @@
 package com.parkme.views.findslot.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_slot_designation.*
 
 class SlotDesignationFragment : Fragment() {
 
+    private var listener: SlotDesignationListener? = null
     private lateinit var terminalId: String
     private val disposable = CompositeDisposable()
 
@@ -47,7 +49,7 @@ class SlotDesignationFragment : Fragment() {
             TerminalImpl().getFreeSlot(terminalId)
                 .subscribe({
                     // Update the UI
-                    progress_bar.visibility = View.GONE
+                    progress_bar?.visibility = View.GONE
                     message.text = it.message
                     message.visibility = View.VISIBLE
                     handleDriverDecision(it.data)
@@ -75,9 +77,9 @@ class SlotDesignationFragment : Fragment() {
             accept_btn.setOnClickListener {
                 disposable.add(TerminalImpl().handleDriverDecision(slot)
                     .subscribe({
-                        // TODO: Display physical navigation
                         Toast.makeText(context!!, it.message, Toast.LENGTH_SHORT).show()
-                        activity!!.finish()
+                        // Display physical navigation
+                        listener!!.displayNavigation(slot)
                     }, {
                         // Display the error message on a dialog
                         val error = ViewUtils.parseAPIError(it)
@@ -87,6 +89,19 @@ class SlotDesignationFragment : Fragment() {
             }
             decline_btn.setOnClickListener { activity!!.finish() }
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is SlotDesignationListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement DriverFragmentListener")
+        }
+    }
+
+    interface SlotDesignationListener {
+        fun displayNavigation(slot: Slot)
     }
 
     companion object {
