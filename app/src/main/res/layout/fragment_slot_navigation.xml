@@ -14,10 +14,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cancel"/>
+            app:layout_constraintBottom_toTopOf="@id/cancel_option"/>
 
     <ImageView
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_cancel_24px"

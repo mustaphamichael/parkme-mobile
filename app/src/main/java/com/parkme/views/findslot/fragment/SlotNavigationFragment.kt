@@ -39,7 +39,7 @@ class SlotNavigationFragment : Fragment() {
         Picasso.with(context!!).load("$IMAGE_URL/gate/1/hub/${slot.hub}")
             .fit().into(slot_navigation_view)
         // Cancel -> Return to Home Activity
-        activity!!.finish()
+        cancel_option.setOnClickListener { activity!!.finish() }
     }
 
     companion object {
