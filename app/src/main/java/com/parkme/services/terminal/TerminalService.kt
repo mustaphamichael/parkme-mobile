@@ -16,12 +16,12 @@ import retrofit2.http.Path
 
 interface TerminalService {
 
-    @GET("$BASE_PATH/terminals")
+    @GET("$BASE_PATH/clusters/terminals")
     fun getTerminals(): Single<ServiceResponse<ArrayList<Terminal>>>
 
-    @GET("$BASE_PATH/terminals/{id}/freeslot")
+    @GET("$BASE_PATH/clusters/terminals/{id}/freeslot")
     fun getFreeSlot(@Path("id") id: String): Single<ServiceResponse<Slot>>
 
-    @POST("$BASE_PATH/terminals/selection/accept")
+    @POST("$BASE_PATH/clusters/selection/accept")
     fun handleDriverDecision(@Body data: Slot): Single<ServiceResponse<Any>>
 }
