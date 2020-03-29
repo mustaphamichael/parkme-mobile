@@ -18,6 +18,7 @@ import com.parkme.views.findslot.fragment.TerminalListFragment
 class FindSlotActivity : AppCompatActivity(),
     TerminalListFragment.TerminalListListener, SlotDesignationFragment.SlotDesignationListener {
     private lateinit var listFragment: TerminalListFragment
+    private lateinit var entryPoint: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,9 @@ class FindSlotActivity : AppCompatActivity(),
                 .add(R.id.fragment_container, listFragment, LIST_TAG)
                 .commit()
         }
+
+        // Get the entry point selected by the driver
+        entryPoint = intent.getStringExtra("entry_point")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,7 +58,11 @@ class FindSlotActivity : AppCompatActivity(),
     override fun displayNavigation(slot: Slot) {
         // Display to slot navigation screen
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, SlotNavigationFragment.newInstance(slot), NAVIGATION_TAG)
+        transaction.replace(
+            R.id.fragment_container,
+            SlotNavigationFragment.newInstance(entryPoint, slot),
+            NAVIGATION_TAG
+        )
             .addToBackStack(SLOT_TAG)
             .commit()
     }

@@ -21,11 +21,15 @@ import kotlinx.android.synthetic.main.fragment_slot_navigation.*
 
 class SlotNavigationFragment : Fragment() {
 
+    private lateinit var entryPoint: String
     private lateinit var slot: Slot
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let { slot = Gson().fromJson(it.getString(SLOT_DATA), Slot::class.java) }
+        arguments?.let {
+            entryPoint = it.getString(ENTRY_POINT)!!
+            slot = Gson().fromJson(it.getString(SLOT_DATA), Slot::class.java)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,21 +39,24 @@ class SlotNavigationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Display image
-        // TODO: Use dynamic gate number
-        Picasso.with(context!!).load("$IMAGE_URL/gate/1/hub/${slot.hub}")
+        Picasso.with(context!!).load("$IMAGE_URL/gate/$entryPoint/hub/${slot.hub}")
             .fit().into(slot_navigation_view)
         // Cancel -> Return to Home Activity
         cancel_option.setOnClickListener { activity!!.finish() }
     }
 
     companion object {
+        private const val ENTRY_POINT = "ENTRY_POINT"
         private const val SLOT_DATA = "SLOT_DATA"
         private const val IMAGE_URL = "${BuildConfig.SERVER_URL}/api/parkme/navigation/images"
 
         @JvmStatic
-        fun newInstance(slot: Slot) =
+        fun newInstance(entryPoint: String, slot: Slot) =
             SlotNavigationFragment().apply {
-                arguments = Bundle().apply { putString(SLOT_DATA, Gson().toJson(slot)) }
+                arguments = Bundle().apply {
+                    putString(ENTRY_POINT, entryPoint)
+                    putString(SLOT_DATA, Gson().toJson(slot))
+                }
             }
     }
 }
